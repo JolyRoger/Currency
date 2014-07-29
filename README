@@ -1,1 +1,5 @@
 This application go to raiifeisen.ru site and parse current rate of USD and EUR. After that it makes a plot showing the course.
+
+The application can be built with sbt tool. Just download source from the repository
+"git clone https://github.com/JolyRoger/Currency.git". Download sbt from http://www.scala-sbt.org and install it.
+Go to application directory and type ">sbt run"
