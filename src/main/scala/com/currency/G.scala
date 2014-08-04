@@ -38,7 +38,7 @@ object G extends JFrame {
     xAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1))
 
     val yAxis: ValueAxis = new NumberAxis("Rate")
-    yAxis.setRange(35.0, 36.5)
+    yAxis.setRange(35.0, 37.0)
     val renderer: XYItemRenderer = new XYLineAndShapeRenderer
     val plot: XYPlot = new XYPlot(dataset, xAxis, yAxis, renderer)
     val chart: JFreeChart = new JFreeChart(legend, new Font("Tahoma", Font.PLAIN, 18), plot, true)

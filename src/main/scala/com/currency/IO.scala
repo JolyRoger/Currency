@@ -26,6 +26,7 @@ object IO {
       fileWriter => using (new PrintWriter(fileWriter)) {
         printWriter => printWriter.println(textData)
       }
+        fileWriter.close
     }
 
   def readFromFile(fileName: String) =
