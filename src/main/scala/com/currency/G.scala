@@ -38,12 +38,12 @@ object G extends JFrame {
     xAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1))
 
     val yAxis: ValueAxis = new NumberAxis("Rate")
-    yAxis.setRange(35.0, 37.0)
+    yAxis.setRange(35.0, 37.5)
     val renderer: XYItemRenderer = new XYLineAndShapeRenderer
     val plot: XYPlot = new XYPlot(dataset, xAxis, yAxis, renderer)
     val chart: JFreeChart = new JFreeChart(legend, new Font("Tahoma", Font.PLAIN, 18), plot, true)
     val chartPanel: ChartPanel = new ChartPanel(chart)
-    chartPanel.setPreferredSize(new Dimension(800, 600))
+    chartPanel.setPreferredSize(new Dimension(1280, 800))
 
     setContentPane(chartPanel)
     setTitle(title)
