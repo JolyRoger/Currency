@@ -23,7 +23,8 @@ object CurrencyParser extends App {
     IO.appendToFile(fileName, today + " " + "%.2f".format(cd.usdBuy) + "/" + "%.2f".format(cd.usdSell) + " " +
       "%.2f".format(cd.eurBuy) + "/" + "%.2f".format(cd.eurSell))
   }
-  G.showPlot("Raiffeisen currency rate Raiffeisen USD and EUR exchange currency rate by the date", lst)
+//  G.showPlot("Raiffeisen currency rate Raiffeisen USD and EUR exchange currency rate by the date", lst)
+  Plot.show("Raiffeisen currency rate Raiffeisen USD and EUR exchange currency rate by the date", lst)
 
   def parse(date: String, today: String) = {
     val currencyData = CurrencyData.parse(date)
