@@ -61,7 +61,7 @@ object Plot extends MainFrame with scala.swing.Reactor /*with App*/ {
         override def mouseWheelMoved(e: MouseWheelEvent) {
           println(" prWhRot:" + e.getPreciseWheelRotation + "  WhRot:" + e.getWheelRotation + " ScrT:" + e.getScrollType + " ScrAm:" + e.getScrollAmount
           + " UnTScr:" + e.getUnitsToScroll)
-          def rangeValue = if (e.getWheelRotation<0) -0.1 else 0.1
+          def rangeValue =  e.getUnitsToScroll / 10d
           yAxis.setRange(yAxis.getRange.getLowerBound + rangeValue, yAxis.getRange.getUpperBound + rangeValue)
         }
       })

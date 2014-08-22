@@ -4,7 +4,7 @@
     <facet type="scala" name="Scala">
       <configuration>
         <option name="compilerLibraryLevel" value="Project" />
-        <option name="compilerLibraryName" value="SBT:: scala-compiler-bundle:2.10.3" />
+        <option name="compilerLibraryName" value="SBT:: scala-compiler-bundle:2.10.4" />
       </configuration>
     </facet>
   </component>
@@ -43,6 +43,7 @@
         <jarDirectory url="file://$MODULE_DIR$/../../lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-swing:2.10.1" level="project" />
   </component>
 </module>
 
