@@ -49,7 +49,7 @@ object Plot extends MainFrame with scala.swing.Reactor/* with App*/ {
       val renderer: XYItemRenderer = new XYLineAndShapeRenderer
       val plot: XYPlot = new XYPlot(dataset, xAxis, yAxis, renderer)
       val chart: JFreeChart = new JFreeChart(legend, new Font("Tahoma", Font.PLAIN, 18), plot, true)
-      val chartPanel: ChartPanelEx = new ChartPanelEx(chart)
+      val chartPanel: ChartPanel = new ChartPanel(chart)
 
 //      chartPanel.setPreferredSize(new Dimension(1280, 800))
       chartPanel.setPreferredSize(new Dimension(640, 480))
@@ -72,8 +72,18 @@ object Plot extends MainFrame with scala.swing.Reactor/* with App*/ {
 
       override def mouseDragged(e: java.awt.event.MouseEvent) {
         if (e.getModifiers == 18) {
-            def xRangeValue =  (e.getX - x) / 10d
-            def yRangeValue =   (e.getY - y) / 10d
+//            def xRangeValue =  (e.getX - x) / 10d
+//            println("x=" + x + ", getx=" + e.getX)
+            val div = x.toDouble / e.getX
+            val xRangeValue = if (x < e.getX) -2.88E7 else
+              if (x > e.getX) 2.88E7 else 0L * div               // 8 hours in milliseconds
+            val yRangeValue = if (y < e.getY) 0.1 else
+              if (y > e.getY) -0.1 else 0 * div               // 8 hours in milliseconds
+              (e.getY - y) / 10d
+            x = e.getX
+            y = e.getY
+//            println("xRangeValue: " + xRangeValue)
+//            println(xAxis.getRange.getLowerBound + ", " + xAxis.getRange.getUpperBound)
             xAxis.setRange(xAxis.getRange.getLowerBound + xRangeValue, xAxis.getRange.getUpperBound + xRangeValue)
             yAxis.setRange(yAxis.getRange.getLowerBound + yRangeValue, yAxis.getRange.getUpperBound + yRangeValue)
         }
@@ -83,7 +93,9 @@ object Plot extends MainFrame with scala.swing.Reactor/* with App*/ {
 
       override def mousePressed(e: java.awt.event.MouseEvent) {
         x = e.getX; y = e.getY
+
         println(e.getButton + " mouse pressed (" + e.getModifiers + " " + e.getModifiersEx + ")")
+
         val rect = chartPanel.getScreenDataArea(e.getX, e.getY)
         val point = getPointInRectangle(e.getX, e.getY, rect)
         val screenDataArea = chartPanel.getScreenDataArea(math.round(point._1).toInt, math.round(point._2).toInt)
@@ -113,7 +125,6 @@ object Plot extends MainFrame with scala.swing.Reactor/* with App*/ {
       }
       this.visible = true
   }
-
 
   val lst = CurrencyData.parse("2014.08.13 35,60/36,85 47,55/49,20") ::
             CurrencyData.parse("2014-08-12 35,40/36,70 47,40/49,15") ::
