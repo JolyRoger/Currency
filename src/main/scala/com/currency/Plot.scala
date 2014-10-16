@@ -4,6 +4,7 @@ import java.awt.Font
 import java.awt.event._
 import java.awt.geom.Rectangle2D
 import java.text.SimpleDateFormat
+import java.util.{GregorianCalendar, Calendar, Date}
 
 import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.chart.axis._
@@ -18,6 +19,11 @@ import scala.swing._
  */
 
 object Plot extends MainFrame with scala.swing.Reactor/* with App*/ {
+  val currencyMin = 38.0
+  val currencyMax = 42.5
+  val dateMin = "2014.09.29"
+  val dateMax = new Date
+
   def show(title: String, list: List[CurrencyData]) {
       this.title = title;
       val legend: String = "Raiffeisen USD and EUR exchange currency rate by the date"
@@ -40,11 +46,13 @@ object Plot extends MainFrame with scala.swing.Reactor/* with App*/ {
       dataset.addSeries(eurBuySeries)
 
       val xAxis: DateAxis = new DateAxis("Date")
+
+      xAxis.setRange(df.parse(dateMin), new Date)
       xAxis.setDateFormatOverride(df)
       xAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1))
 
       val yAxis: ValueAxis = new NumberAxis("Rate")
-      yAxis.setRange(35.0, 37.5)
+      yAxis.setRange(currencyMin, currencyMax)
 
       val renderer: XYItemRenderer = new XYLineAndShapeRenderer
       val plot: XYPlot = new XYPlot(dataset, xAxis, yAxis, renderer)
